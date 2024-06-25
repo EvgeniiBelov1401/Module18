@@ -17,9 +17,9 @@ namespace FinalExercise.Models
             VideoURL = videoURL;
         }
 
-        public void Run()
+        public async Task Run()
         {
-            _command.Execute(VideoURL);
+           await _command.Execute(VideoURL);
         }
     }
 }
