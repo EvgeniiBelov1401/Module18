@@ -8,9 +8,6 @@ namespace FinalExercise
         {
             while (true)
             {
-                //string videoURL = "https://www.youtube.com/watch?v=anK6bt9wvmk";
-                
-
                 Console.Write("Введите ссылку: ");
                 string videoURL=Console.ReadLine();
 
