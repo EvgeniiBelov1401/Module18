@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using YoutubeExplode;
 using YoutubeExplode.Converter;
+using YoutubeExplode.Videos.Streams;
 
 namespace FinalExercise.Models
 {
@@ -16,16 +17,17 @@ namespace FinalExercise.Models
         {
             FilePath = outputFilePath;
         }
-        
+
         public async Task Execute(string videoURL)
         {
             var youtube = new YoutubeClient();
-            var video = await youtube.Videos.GetAsync(videoURL);
-            //var videoStreamInfo = video.Streams.First(s => s.Container == Container.Mp4);
 
-           Console.WriteLine(Environment.NewLine+"Здесь должно быть скачивание видео...");
+            var streamManifest = await youtube.Videos.Streams.GetManifestAsync(videoURL);
+            var streamInfo = streamManifest.GetMuxedStreams().GetWithHighestVideoQuality();
 
+            await youtube.Videos.Streams.DownloadAsync(streamInfo, $"video.{streamInfo.Container}");
 
+            Console.WriteLine($"Видео будет скачано в папку{Environment.NewLine}{FilePath}");
         }
     }
 }
