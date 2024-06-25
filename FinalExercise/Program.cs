@@ -9,15 +9,14 @@ namespace FinalExercise
             while (true)
             {
                 Console.Write("Введите ссылку: ");
-                string videoURL=Console.ReadLine();
+                string? videoURL=Console.ReadLine();
 
                 if (IsURL(videoURL))
                 {
                     if (IsYoutubeURL(videoURL))
                     {
-                        string outputFilePath = @"D:\Programming\Skillfactory\C#_projects\Module18\Repository\FinalExercise\bin\Debug\net8.0";
                         var description = new VideoDescription();
-                        var download = new VideoDownLoad(outputFilePath);
+                        var download = new VideoDownLoad();
 
                         var client = new Client(description, videoURL);
                         client.Run();
